@@ -1,17 +1,58 @@
+// Iniciar un proyecto npm init -y
+// npm i express
 
-import express from 'express'
+// Crear app.js
 
-const app = express()
+// configurar packkage.jason => Agregar app.js
+// "main": "app.js",
 
-// Rutas => Routes => ROUTER
-app.get('/', (req, res) => { // El "/" es el index de la app, ruta
-  res.send('Hello World"""')
-})
+// npm i nodemon
 
-app.get('/contacto', (req, res) => {
-    res.send('Pagina de contacto!')
-})
+// configurar el package.jason => con "scripts" : {
+// "dev:" : "nodemon app.js",
+//  "stars": "node app.js"}
 
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000')
-})
+// .env => Tiene todos los usarios y constraseñas
+
+// Crear un .gitignore
+// -> node_modules y .env
+
+// Correr app: npm run dev o npm run start
+
+import express from 'express';
+const path = require('path');
+
+const app = express(); // Hereda todo lo de express
+
+const PORT = 3000;
+
+// Configurar EJS
+app.set('view engine', 'ejs');
+
+// Archico Estaticos
+app.use(express.static(path.join.apply(__dirname, 'public')));
+
+// Rutas
+app.get('/', (req,res) => {
+  res.render('index');
+});
+
+app.get('/servicios', (req, res) => {
+  res.send('<h1>SERVICIOS<h1>')
+});
+
+app.get('/nosotros', (req,res) => {
+  res.send('<h1>NOSOTROS<h1>');
+});
+
+app.get('/', (req,res) => {
+  res.send('<h1>CONTACTO<h1>');
+});
+
+
+
+
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
