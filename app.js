@@ -19,18 +19,24 @@
 
 // Correr app: npm run dev o npm run start
 
-import express from 'express';
+
+const express = require('express');
 const path = require('path');
+require('dotenv').config();
 
 const app = express(); // Hereda todo lo de express
 
-const PORT = 3000;
+const PORT = process.env.PORT;
+console.log(PORT);
+
+const user = process.env.DB_USER;
+console.log(user);
 
 // Configurar EJS
 app.set('view engine', 'ejs');
 
 // Archico Estaticos
-app.use(express.static(path.join.apply(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas
 app.get('/', (req,res) => {
@@ -38,18 +44,16 @@ app.get('/', (req,res) => {
 });
 
 app.get('/servicios', (req, res) => {
-  res.send('<h1>SERVICIOS<h1>')
+  res.render('servicios')
 });
 
 app.get('/nosotros', (req,res) => {
-  res.send('<h1>NOSOTROS<h1>');
+  res.render('nosotros');
 });
 
-app.get('/', (req,res) => {
-  res.send('<h1>CONTACTO<h1>');
+app.get('/contacto', (req,res) => {
+  res.render('contacto');
 });
-
-
 
 
 
